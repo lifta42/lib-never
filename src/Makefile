@@ -5,8 +5,8 @@ modules = control function testcase
 objects = $(modules:%=%.o)
 library = libcps.a
 
-_test_execuables = $(modules:%=%_test)
-_test_sources = $(_test_execuables:%=%.cpp)
+test_sources = $(wildcard *_test.cpp)
+test_targets = $(test_sources:%.cpp=%)
 
 CXXFLAGS += -std=c++14
 
@@ -17,8 +17,11 @@ $(library): $(objects)
 
 control.o: function.h
 
-testcases:
+testcases: $(test_targets)
+
+%_test: $(library)
+%_test: LDLIBS += $(library)
 
 clean:
-	rm $(library) $(objects)
+	rm $(library) $(objects) $(test_targets)
 .PHONY: clean

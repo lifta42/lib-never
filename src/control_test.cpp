@@ -1,5 +1,6 @@
 #include <iostream>
 #include "control.h"
+#include "function.h"
 
 
 Never test_when(ContV cont) {
