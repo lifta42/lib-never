@@ -14,7 +14,22 @@ Never test(const char *description, Test block, ContA<bool> cont);
 using CurryTest = ContA<ContA<bool>>;
 CurryTest test_c(const char *description, Test block);
 
-Never testcase(const char *desc, bool ignore, std::list<CurryTest> tests,
+using Tests = std::list<CurryTest>;
+Never testcase(const char *desc, bool ignore, Tests tests,
   ContV cont);
+
+#define TestcaseStart(desc, ignore, tests) \
+  Start(ret) { \
+  never( \
+    testcase(desc, ignore, tests, [&ret] () { \
+    never( \
+      ret(0); \
+    )); \
+  )
+
+#define Test(desc, block) \
+  test_c(desc, [] (Say say) \
+    block \
+  )
 
 #endif

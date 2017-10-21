@@ -27,8 +27,7 @@ CurryTest test_c(const char *desc, Test block) {
   );
 }
 
-Never testcase(const char *desc, bool ignore, std::list<CurryTest> tests,
-  ContV cont) {
+Never testcase(const char *desc, bool ignore, Tests tests, ContV cont) {
   // should not depend on control module, so do not use control method
   if (tests.size() == 0) {
   never(
