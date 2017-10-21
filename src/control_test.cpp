@@ -11,7 +11,7 @@ Never test_when(ContV cont) {
 
 never(
   when([] () {
-    return 2 > 3;
+    return 2 < 3;
   }, [&] () {
     cout << true_string << endl;
   }, [&] () {

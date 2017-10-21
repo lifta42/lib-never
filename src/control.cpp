@@ -8,7 +8,3 @@ Never when(FuncR<bool> &&cond, ContV &&tc, ContV &&fc) {
     fc();
   }
 }
-
-Never done() {
-  //
-}
