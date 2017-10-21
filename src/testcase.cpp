@@ -3,18 +3,19 @@
 
 
 Never test(const char *desc, Test block, ContA<bool> cont) {
-  std::cout << "testing " << desc << "...";
+  std::cout << "testing " << desc << " ";
   block([&cont] (bool asserted) {  // say
+    std::cout << ".";
     // should not depend on anything in this module
     // so do not use functions from `control`
     asserted || \
-      std::cout << "FAILED" << std::endl && \
+      std::cout << " FAILED" << std::endl && \
       // trivial `, true` for boolean expr
       // todo: hard question, this callback may return and may not
       // so should `say` be a `FuncA` or a `ContA`
       (cont(false), true);
   });
-  std::cout << "ok" << std::endl;
+  std::cout << " ok" << std::endl;
 never(
   cont(true);
 )

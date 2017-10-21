@@ -53,6 +53,24 @@ never(
   ));
 )
 
+Never test_assert_dot(ContV cont) {
+never(
+  test("three dots and ok", [] (Say say) {
+    say(1 < 2);
+    say(2 < 3);
+    say(3 < 4);
+  }, [&] (bool _) {
+  never(
+    test("three dots and failed", [] (Say say) {
+      say(1 < 2);
+      say(2 < 3);
+      say(3 > 4);
+    }, [&] (bool _) {
+    never(
+      cont();
+    ));
+  ));
+)
 
 
 Start(ret) {
@@ -63,7 +81,10 @@ never(
     never(
       test_testcase([&] () {
       never(
-        ret(0);
+        test_assert_dot([&] () {
+        never(
+          ret(0);
+        ));
       ));
     ));
   ));
