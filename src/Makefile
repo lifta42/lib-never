@@ -1,7 +1,7 @@
 # cps-library/src/Makefile
 # 2017.10.21 by liftA42.
 
-modules = control function
+modules = control function testcase
 objects = $(modules:%=%.o)
 library = libcps.a
 
