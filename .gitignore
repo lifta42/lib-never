@@ -1,0 +1,4 @@
+*.o
+*.out
+*_test
+lib*
