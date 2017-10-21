@@ -1,6 +1,7 @@
 #include "control.h"
 
 Never when(FuncR<bool> cond, ContV tc, ContV fc) {
+never(
   if (cond()) {
   never(
     tc();
@@ -9,4 +10,4 @@ Never when(FuncR<bool> cond, ContV tc, ContV fc) {
   never(
     fc();
   )
-}
+)

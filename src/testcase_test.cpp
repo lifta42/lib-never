@@ -31,6 +31,29 @@ never(
   ));
 )
 
+Never test_testcase(ContV cont) {
+never(
+  testcase("ignore testcase", true, {
+    test_c("simple assertion 1", [] (Say say) {
+      say(2 > 3);
+    }),
+    test_c("simple assertion 2", [] (Say say) {
+      say(3 < 4);
+    })
+  }, [&] () {
+  never(
+    testcase("break testcase", false, {
+      test_c("simple assertion 1", [] (Say say) {
+        say(2 > 3);
+      }),
+      test_c("simple assertion 2", [] (Say say) {
+        say(3 < 4);
+      })
+    }, cont);
+  ));
+)
+
+
 
 Start(ret) {
 never(
@@ -38,7 +61,10 @@ never(
   never(
     test_curry([&] () {
     never(
-      ret(0);
+      test_testcase([&] () {
+      never(
+        ret(0);
+      ));
     ));
   ));
 )

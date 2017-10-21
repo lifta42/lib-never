@@ -4,7 +4,7 @@
 #ifndef CPS_LIBRARY_TESTCASE_H
 #define CPS_LIBRARY_TESTCASE_H
 
-#include <vector>
+#include <list>
 #include "function.h"
 
 using Say = FuncA<bool>;
@@ -14,6 +14,7 @@ Never test(const char *description, Test block, ContA<bool> cont);
 using CurryTest = ContA<ContA<bool>>;
 CurryTest test_c(const char *description, Test block);
 
-Never testcase(const char *desc, std::vector<CurryTest> &&tests, ContV &&cont);
+Never testcase(const char *desc, bool ignore, std::list<CurryTest> tests,
+  ContV cont);
 
 #endif
