@@ -23,7 +23,7 @@ never(
   ));
 )
 
-Never start(ContA<int> cont) {
+Start(ret) {
   using std::cout;
   using std::endl;
 
@@ -31,6 +31,6 @@ never(
   test_when([&] () {
     cout << "Done." << endl;
   never(
-    cont(0);
+    ret(0);
   ));
 )

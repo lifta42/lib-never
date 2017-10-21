@@ -7,7 +7,7 @@
 #include <functional>
 
 #define never(calling) calling }
-typedef void Never;
+using Never = void;
 
 template <typename T> using Func = std::function<T>;
 template <typename T> using FuncA = Func<Never (T &&)>;
@@ -17,5 +17,8 @@ using ContV = FuncV;
 template <typename T> using FuncR = Func<T ()>;
 
 Never done();
+
+#define Start(cont) \
+  Never start(ContA<int> cont)
 
 #endif
