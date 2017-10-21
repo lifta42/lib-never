@@ -14,12 +14,23 @@ never(
     return 2 < 3;
   }, [&] () {
     cout << true_string << endl;
-  }, [&] () {
+  never(
+    cont();
+  ), [&] () {
     cout << false_string << endl;
-  });
+  never(
+    cont();
+  ));
 )
 
-int main() {
-  test_when(done);
-  return 0;
-}
+Never start(ContA<int> cont) {
+  using std::cout;
+  using std::endl;
+
+never(
+  test_when([&] () {
+    cout << "Done." << endl;
+  never(
+    cont(0);
+  ));
+)

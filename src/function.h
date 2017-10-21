@@ -10,7 +10,7 @@
 typedef void Never;
 
 template <typename T> using Func = std::function<T>;
-template <typename T> using FuncA = Func<Never (T)>;
+template <typename T> using FuncA = Func<Never (T &&)>;
 using FuncV = Func<Never ()>;
 template <typename T> using ContA = FuncA<T>;
 using ContV = FuncV;
