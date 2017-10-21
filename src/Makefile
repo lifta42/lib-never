@@ -10,17 +10,16 @@ test_targets = $(test_sources:%.cpp=%)
 
 CXXFLAGS += -std=c++14
 
-all: $(library) testcases
+all: $(library) $(test_targets)
 
 $(library): $(objects)
 	ar -rs $@ $^
 
-control.o: function.h
+$(objects): %.o:%.h
 
-testcases: $(test_targets)
 
-%_test: $(library)
-%_test: LDLIBS += $(library)
+$(test_targets): $(library)
+
 
 clean:
 	rm $(library) $(objects) $(test_targets)
