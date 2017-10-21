@@ -4,13 +4,16 @@
 #ifndef CPS_LIBRARY_TESTCASE_H
 #define CPS_LIBRARY_TESTCASE_H
 
-#include <map>
+#include <vector>
 #include "function.h"
 
 using Say = FuncA<bool>;
 using Test = FuncA<Say>;
-
 Never test(const char *description, Test block, ContA<bool> cont);
-ContA<ContA<bool>> test_c(const char *desc, Test block);
+
+using CurryTest = ContA<ContA<bool>>;
+CurryTest test_c(const char *description, Test block);
+
+Never testcase(const char *desc, std::vector<CurryTest> &&tests, ContV &&cont);
 
 #endif

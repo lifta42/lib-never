@@ -18,14 +18,14 @@ never(
   cont(true);
 )
 
-ContA<ContA<bool>> test_c(const char *desc, Test block) {
-  return [&desc, &block] (ContA<bool> cont) {
+CurryTest test_c(const char *desc, Test block) {
+  return [desc, &block] (ContA<bool> cont) {
   never(
     test(desc, block, cont);
   );
 }
 
-Never testcase(const char *desc, std::map<const char *, Test> &&tests,
+Never testcase(const char *desc, std::vector<CurryTest> &&tests,
   ContV &&cont) {
 
 }

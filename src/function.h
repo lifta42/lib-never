@@ -17,8 +17,6 @@ using FuncV = FuncR<void>;
 template <typename T> using ContA = Func<Never (T)>;
 using ContV = Func<void ()>;
 
-Never done();
-
 #define Start(cont) Never start(ContA<int> cont)
 
 #endif

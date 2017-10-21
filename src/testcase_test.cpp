@@ -20,9 +20,25 @@ never(
   ));
 )
 
+Never test_curry(ContV cont) {
+never(
+  test_c("assert in a currying test function", [] (Say say) {
+    int x = 42;
+    say(x == 42);
+  })([&] (bool _) {
+  never(
+    cont();
+  ));
+)
+
+
 Start(ret) {
 never(
   test_assert([&] () {
-    ret(0);
-  });
+  never(
+    test_curry([&] () {
+    never(
+      ret(0);
+    ));
+  ));
 )
