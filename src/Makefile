@@ -1,12 +1,13 @@
 # cps-library/src/Makefile
 # 2017.10.21 by liftA42.
 
+project = never
+
 modules = function testcase testcase_start
 objects = $(modules:%=%.o)
-library = libnever.a
+library = lib$(project).a
 
-test_sources = $(wildcard *_test.cpp)
-test_targets = $(test_sources:%.cpp=%)
+test_targets = testcase_test testcase_start_test
 
 CXXFLAGS += -std=c++14
 
