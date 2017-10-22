@@ -1,5 +1,7 @@
 #include <map>
 #include <iostream>
+#include <cstring>
+#include <vector>
 #include "testcase_start.h"
 #include "function.h"
 
@@ -47,9 +49,44 @@ never(
   )
 )
 
+void preprocess_testcases(Testcases &cases, int argc, char *argv[]) {
+  using namespace std;
+
+  vector<const char *> not_found_names;
+  vector<bool> found_argv(argc, false);
+  for (auto cs : cases) {
+    int found = -1;
+    for (int i = 1; i < argc; i++) {
+      char *name = argv[i];
+      if (strcmp(name, cs.first) == 0) {
+        found = i;
+        found_argv[i] = true;
+        break;
+      }
+    }
+    if (found < 0) {
+      not_found_names.push_back(cs.first);
+    }
+  }
+
+  for (const char *name : not_found_names) {
+    cases.erase(name);
+  }
+  for (int i = 1; i < argc; i++) {
+    if (!found_argv[i]) {
+      cout << "warning: not found testcase \"" << argv[i] << "\"" << endl;
+    }
+  }
+  cout << "~~~" << endl;
+}
+
 Never start(int argc, char *argv[], ContA<int> pass) {
+  Testcases& cases = testcases();
+  if (argc > 1) {
+    preprocess_testcases(cases, argc, argv);
+  }
 never(
-  test_all(testcases(), flags(), [&pass] (bool ok) {
+  test_all(cases, flags(), [&pass] (bool ok) {
   never(
     pass(ok ? 0 : 1)
   ))
