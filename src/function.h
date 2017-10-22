@@ -6,9 +6,14 @@
 
 #include <functional>
 
+struct NeverReach {
+  const char *file;
+  int line;
+};
+
 #define never(calling) \
     calling; \
-    throw "should not be executed"; \
+    throw NeverReach { __FILE__, __LINE__ }; \
   }
 
 using Never = void;
