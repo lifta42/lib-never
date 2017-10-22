@@ -1,37 +1,28 @@
-#include <iostream>
 #include "control.h"
+#include "testcase.h"
 #include "function.h"
 
 
-Never test_when(ContV cont) {
-  using std::cout;
-  using std::endl;
-
-  char true_string[] = "This is true branch.";
-  char false_string[] = "This is false branch.";
-
-never(
-  when([] () {
-    return 2 < 3;
-  }, [&] () {
-    cout << true_string << endl;
+TestcaseStart("Control", true, (Tests {
+  Test("when select true branch", {
   never(
-    cont();
-  ), [&] () {
-    cout << false_string << endl;
+    when(Expr(2 < 3),
+      [&] () {
+        say(true);
+      }, [&] () {
+        say(false);
+      }
+    );
+  )),
+  Test("when select false branch", {
+    // int x = 2, y = 3;
   never(
-    cont();
-  ));
-)
-
-Start(ret) {
-  using std::cout;
-  using std::endl;
-
-never(
-  test_when([&] () {
-    cout << "Done." << endl;
-  never(
-    ret(0);
-  ));
-)
+    when(Expr(2 > 3),
+      [&] () {
+        say(false);
+      }, [&] () {
+        say(true);
+      }
+    );
+  ))
+}))

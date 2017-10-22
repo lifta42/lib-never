@@ -1,7 +1,7 @@
 #include "testcase.h"
 
 
-TestcaseStart("simple testcase", true, (Tests {
+TestcaseStart("TestcaseStart", true, (Tests {
   Test("fail asserting", {
     say(2 > 3);
   }),
