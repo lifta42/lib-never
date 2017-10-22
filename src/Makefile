@@ -1,7 +1,7 @@
 # cps-library/src/Makefile
 # 2017.10.21 by liftA42.
 
-modules = function testcase
+modules = function testcase testcase_start
 objects = $(modules:%=%.o)
 library = libnever.a
 
