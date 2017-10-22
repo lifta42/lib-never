@@ -14,6 +14,8 @@ Never test(const char *case_name, const char *test_name, Test test,
   ContA<bool> pass);
 
 using Tests = std::map<const char *, Test>;
-Never test_testcase(const char *case_name, Tests tests, ContA<bool> pass);
+enum Strategy { IGNORE, STOP };
+Never test_testcase(const char *case_name, Strategy strategy, Tests tests,
+  ContA<bool> pass);
 
 #endif

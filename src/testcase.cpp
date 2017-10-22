@@ -20,12 +20,15 @@ never(
   pass(true)
 )
 
-Never test_testcase(const char *case_name, Tests tests, ContA<bool> pass) {
+Never test_testcase(const char *case_name, Strategy strategy, Tests tests,
+  ContA<bool> pass) {
   // The very first example of how to write code in CPS.
+  using namespace std;
+
 never(
   if (tests.size() == 0) {
   never(
-    pass(true);
+    pass(true)
   )
   else {
     Tests::iterator first_position = tests.begin();
@@ -34,14 +37,25 @@ never(
     tests.erase(first_position);
   never(
     test(case_name, test_name, test_block,
-      [&tests, &pass, case_name] (bool ok) {
+      [&tests, &pass, &strategy, case_name] (bool ok) {
     never(
       if (ok) {
       never(
-        test_testcase(case_name, tests, pass)
+        test_testcase(case_name, strategy, tests, pass)
+      )
+      else if (strategy == IGNORE) {
+        cout << "-> ignore failed test and continue" << endl;
+      never(
+        test_testcase(case_name, strategy, tests, [&ok, &pass] (bool _) {
+        never(
+          // force passing false to continuation here no matter how the rest
+          // tests are
+          pass(false)
+        ))
       )
       else {
       never(
+        cout << "-> abort testcase: " << case_name << endl;
         pass(false)
       )
     ))
