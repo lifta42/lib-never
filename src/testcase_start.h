@@ -8,10 +8,10 @@
 
 
 using DummyType = int;
-DummyType store_testcase(const char *case_name, Tests tests);
+DummyType store_testcase(const char *case_name, Strategy strategy, Tests tests);
 
-#define TESTCASE(case_name, tests) \
+#define TESTCASE(case_name, strategy, tests) \
   DummyType never_dummy_var_for_##case_name = \
-    store_testcase(#case_name, tests);
+    store_testcase(#case_name, strategy, tests);
 
 #endif
