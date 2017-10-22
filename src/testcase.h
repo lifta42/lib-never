@@ -4,6 +4,7 @@
 #ifndef CPS_LIBRARY_TESTCASE_H
 #define CPS_LIBRARY_TESTCASE_H
 
+#include <map>
 #include "function.h"
 
 
@@ -11,5 +12,8 @@ using Say = FuncA<bool>;
 using Test = FuncA<Say>;
 Never test(const char *case_name, const char *test_name, Test test,
   ContA<bool> pass);
+
+using Tests = std::map<const char *, Test>;
+Never test_testcase(const char *case_name, Tests tests, ContA<bool> pass);
 
 #endif
