@@ -3,7 +3,7 @@
 
 modules = function testcase
 objects = $(modules:%=%.o)
-library = libcps.a
+library = libnever.a
 
 test_sources = $(wildcard *_test.cpp)
 test_targets = $(test_sources:%.cpp=%)
@@ -17,9 +17,7 @@ $(library): $(objects)
 
 $(objects): %.o:%.h
 
-
 $(test_targets): $(library)
-
 
 clean:
 	rm $(library) $(objects) $(test_targets)
