@@ -1,11 +1,10 @@
 #include <cstdlib>
 #include "function.h"
 
-extern Never start(ContA<int> cont);
-int main() {
+int main(int argc, char *argv[]) {
 never(
-  start([&] (int result) {
+  start(argc, argv, [&] (int result) {
   never(
-    std::exit(result);
-  ));
+    std::exit(result)
+  ))
 )

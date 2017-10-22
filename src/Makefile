@@ -1,7 +1,7 @@
 # cps-library/src/Makefile
 # 2017.10.21 by liftA42.
 
-modules = control function testcase
+modules = function
 objects = $(modules:%=%.o)
 library = libcps.a
 
@@ -10,7 +10,7 @@ test_targets = $(test_sources:%.cpp=%)
 
 CXXFLAGS += -std=c++14
 
-all: $(library) $(test_targets)
+all: $(library) #$(test_targets)
 
 $(library): $(objects)
 	ar -rs $@ $^

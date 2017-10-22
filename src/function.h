@@ -6,7 +6,11 @@
 
 #include <functional>
 
-#define never(calling) calling }
+#define never(calling) \
+    calling; \
+    throw "should not be executed"; \
+  }
+
 using Never = void;
 
 template <typename T> using Func = std::function<T>;
@@ -19,8 +23,8 @@ using FuncV = FuncR<void>;
   }
 
 template <typename T> using ContA = Func<Never (T)>;
-using ContV = Func<void ()>;
+using ContV = Func<Never ()>;
 
-#define Start(cont) Never start(ContA<int> cont)
+extern Never start(int argc, char *argv[], ContA<int> pass);
 
 #endif
