@@ -1,91 +1,19 @@
 #include "testcase.h"
 #include "function.h"
-#include <iostream>
-using namespace std;
 
-Never test_assert(ContV cont) {
-never(
-  test("assert true expression", [] (Say say) {
-    say(2 < 3);
-  }, [&] (bool _) {
-  never(
-    test("assert false expression", [] (Say say) {
-      say(2 > 3);
-      // never reachable
-      throw "should not be executed";
-    }, [&] (bool _) {
-    never(
-        cont();
-    ));
-  ));
-)
 
-Never test_curry(ContV cont) {
+Never test_test(ContV pass) {
 never(
-  test_c("assert in a currying test function", [] (Say say) {
-    int x = 42;
-    say(x == 42);
-  })([&] (bool _) {
+  test("testcase name", "test name", [] (Say say) {
+    say(true);
+  }, [&] (bool ok) {
   never(
-    cont();
-  ));
-)
-
-Never test_testcase(ContV cont) {
-never(
-  testcase("ignore testcase", true, {
-    test_c("simple assertion 1", [] (Say say) {
-      say(2 > 3);
-    }),
-    test_c("simple assertion 2", [] (Say say) {
-      say(3 < 4);
-    })
-  }, [&] () {
-  never(
-    testcase("break testcase", false, {
-      test_c("simple assertion 1", [] (Say say) {
-        say(2 > 3);
-      }),
-      test_c("simple assertion 2", [] (Say say) {
-        say(3 < 4);
-      })
-    }, cont);
-  ));
-)
-
-Never test_assert_dot(ContV cont) {
-never(
-  test("three dots and ok", [] (Say say) {
-    say(1 < 2);
-    say(2 < 3);
-    say(3 < 4);
-  }, [&] (bool _) {
-  never(
-    test("three dots and failed", [] (Say say) {
-      say(1 < 2);
-      say(2 < 3);
-      say(3 > 4);
-    }, [&] (bool _) {
-    never(
-      cont();
-    ));
-  ));
+    pass()
+  ))
 )
 
 
-Start(ret) {
+Never start(int argc, char *argv[], ContA<int> pass) {
 never(
-  test_assert([&] () {
-  never(
-    test_curry([&] () {
-    never(
-      test_testcase([&] () {
-      never(
-        test_assert_dot([&] () {
-        never(
-          ret(0);
-        ));
-      ));
-    ));
-  ));
+  pass(0)
 )

@@ -17,7 +17,7 @@ template <typename T> using Func = std::function<T>;
 template <typename T> using FuncA = Func<void (T)>;
 template <typename T> using FuncR = Func<T ()>;
 using FuncV = FuncR<void>;
-#define Expr(expr) \
+#define EXPR(expr) \
   [&] () { \
     return (expr); \
   }
