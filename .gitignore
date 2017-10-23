@@ -2,3 +2,7 @@
 *.out
 *_test
 lib*
+
+example/*
+!example/Makefile
+!example/*.cpp
