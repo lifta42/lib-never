@@ -7,7 +7,7 @@ struct NeverExit {
 
 int main(int argc, char *argv[]) {
   try {
-    start(argc, argv, [&] (int code) {
+    start(argc, argv, [&] (int &&code) {
       throw NeverExit { code };
     });
   }
