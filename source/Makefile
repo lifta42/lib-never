@@ -3,23 +3,24 @@
 
 project = never
 
-modules = function testcase testcase_start
+modules = function
 objects = $(modules:%=%.o)
 library = lib$(project).a
+
+modules_test = testcase testcase_start
+objects_test = $(modules_test:%=%.o)
+library_test = lib$(project)_test.a
 
 test_targets = testcase_test testcase_start_test
 
 CXXFLAGS += -std=c++14
 
-all: $(library) $(test_targets)
+all: $(library)($(objects)) $(library_test)($(objects_test)) $(test_targets)
 
-$(library): $(objects)
-	ar -rs $@ $^
+$(objects) $(objects_test): %.o:%.h
 
-$(objects): %.o:%.h
-
-$(test_targets): $(library)
+$(test_targets): $(library) $(library_test)
 
 clean:
-	rm $(library) $(objects) $(test_targets)
+	-rm $(library) $(library) $(objects) $(objects_test) $(test_targets)
 .PHONY: clean
