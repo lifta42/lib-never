@@ -9,13 +9,18 @@ example_dir = example
 library = lib$(project).a
 library_test = lib$(project)_test.a
 
-export project source_dir example_dir library library_test
+CXXFLAGS += -std=c++14 -O2
+
+export project source_dir example_dir library library_test CXXFLAGS
 
 all:
 	make -C $(source_dir)
 
 example:
 	make -C $(example_dir)
+
+test:
+	make -C $(source_dir) test
 
 clean:
 	make -C $(source_dir) clean

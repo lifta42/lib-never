@@ -7,7 +7,7 @@ targets = $(sources:%.cpp=%)
 library := ../$(source_dir)/$(library)
 library_test := ../$(source_dir)/$(library_test)
 
-CXXFLAGS += -std=c++14 -I../source
+CXXFLAGS += -I../$(source_dir)
 
 all: $(targets)
 

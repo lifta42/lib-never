@@ -9,8 +9,6 @@ objects_test = $(modules_test:%=%.o)
 
 test_targets = testcase_test testcase_start_test
 
-CXXFLAGS += -std=c++14
-
 all: $(library)($(objects)) $(library_test)($(objects_test)) $(test_targets)
 
 $(objects) $(objects_test): %.o:%.h
