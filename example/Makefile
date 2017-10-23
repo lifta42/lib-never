@@ -4,8 +4,8 @@
 sources = $(wildcard *.cpp)
 targets = $(sources:%.cpp=%)
 
-library = ../source/libnever.a
-library_test = ../source/libnever_test.a
+library := ../$(source_dir)/$(library)
+library_test := ../$(source_dir)/$(library_test)
 
 CXXFLAGS += -std=c++14 -I../source
 
