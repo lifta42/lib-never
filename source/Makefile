@@ -17,6 +17,10 @@ $(objects) $(objects_test): %.o:%.h
 
 $(test_targets): $(library) $(library_test)
 
+test:
+	sh testcase_test.sh
+
 clean:
 	-rm $(library) $(objects) $(objects_test) $(test_targets)
-.PHONY: clean
+
+.PHONY: all test clean
