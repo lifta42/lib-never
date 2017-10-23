@@ -19,7 +19,7 @@ struct NeverReach {
 using Never = void;
 
 template <typename T> using Func = std::function<T>;
-template <typename T> using FuncA = Func<void (&& T)>;
+template <typename T> using FuncA = Func<void (T &&)>;
 template <typename T> using FuncR = Func<T ()>;
 using FuncV = FuncR<void>;
 #define EXPR(expr) \
@@ -27,7 +27,7 @@ using FuncV = FuncR<void>;
     return (expr); \
   }
 
-template <typename T> using ContA = Func<Never (&& T)>;
+template <typename T> using ContA = Func<Never (T &&)>;
 using ContV = Func<Never ()>;
 
 extern Never start(int argc, char *argv[], ContA<int> pass);

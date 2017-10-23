@@ -8,7 +8,7 @@ never(
     say(true);
     say(false);
     say(true);  // unreachable
-  }, [&] (bool ok) {
+  }, [&] (bool &&ok) {
   never(
     pass()
   ))
@@ -17,23 +17,23 @@ never(
 Never test_test_testcase(ContV pass) {
 never(
   test_testcase("simple testcase", STOP, {
-    {"test 1", [] (Say say) {
+    {"test 1", [] (Say &&say) {
       say(2 < 3);
       say(3 < 4);
     }},
-    {"test 2", [] (Say say) {
+    {"test 2", [] (Say &&say) {
       say(5 == 5);
       say(6 == 7);
       say(7 == 7);
     }},
-    {"unreachable test", [] (Say say) {
+    {"unreachable test", [] (Say &&say) {
       say(true);
     }}
-  }, [&] (bool ok) {
+  }, [&] (bool &&ok) {
   never(
-    test("simple testcase", "final flag", [&] (Say say) {
+    test("simple testcase", "final flag", [&] (Say &&say) {
       say(ok == false);
-    }, [&] (bool ok) {
+    }, [&] (bool &&ok) {
     never(
       pass()
     ))
@@ -43,17 +43,17 @@ never(
 Never test_test_testcase_strategy(ContV pass) {
 never(
   test_testcase("ignore testcase", IGNORE, {
-    {"fail first", [] (Say say) {
+    {"fail first", [] (Say &&say) {
       say(false);
     }},
-    {"still test", [] (Say say) {
+    {"still test", [] (Say &&say) {
       say(true);
     }}
-  }, [&] (bool ok) {
+  }, [&] (bool &&ok) {
   never(
-    test("ignore testcase", "final flag", [&] (Say say) {
+    test("ignore testcase", "final flag", [&] (Say &&say) {
       say(ok == false);
-    }, [&] (bool ok) {
+    }, [&] (bool &&ok) {
     never(
       pass()
     ))
@@ -63,17 +63,17 @@ never(
 Never test_test_testcase_final_ok(ContV pass) {
 never(
   test_testcase("all right", IGNORE, {
-    {"test 1", [] (Say say) {
+    {"test 1", [] (Say &&say) {
       say(40 + 2 == 42);
     }},
-    {"test 2", [] (Say say) {
+    {"test 2", [] (Say &&say) {
       say(6 * 7 == 42);
     }}
-  }, [&] (bool ok) {
+  }, [&] (bool &&ok) {
   never(
-    test("all right", "final flag", [&] (Say say) {
+    test("all right", "final flag", [&] (Say &&say) {
       say(ok == true);
-    }, [&] (bool ok) {
+    }, [&] (bool &&ok) {
     never(
       pass()
     ))

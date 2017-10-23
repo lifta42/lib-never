@@ -38,10 +38,10 @@ never(
     cout << ">> start testcase " << testcase_name << endl;
   never(
     test_testcase(testcase_name, flags[testcase_name], testcase_body,
-      [testcase_name, &testcases, &flags, &pass] (bool ok) {
+      [testcase_name, &testcases, &flags, &pass] (bool &&ok) {
       cout << ">> finish testcase " << testcase_name << endl;
     never(
-      test_all(testcases, flags, ok ? pass : [&pass] (bool _) {
+      test_all(testcases, flags, ok ? pass : [&pass] (bool &&_) {
       never(
         pass(false)
       ))
@@ -86,7 +86,7 @@ Never start(int argc, char *argv[], ContA<int> pass) {
     preprocess_testcases(cases, argc, argv);
   }
 never(
-  test_all(cases, flags(), [&pass] (bool ok) {
+  test_all(cases, flags(), [&pass] (bool &&ok) {
   never(
     pass(ok ? 0 : 1)
   ))

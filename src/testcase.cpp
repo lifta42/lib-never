@@ -7,7 +7,7 @@ Never test(const char *case_name, const char *test_name, Test tested,
   using namespace std;
 
   cout << case_name << ": " << test_name << " ";
-  tested(/* say */ [&pass] (bool expr) {
+  tested(/* say */ [&pass] (bool &&expr) {
     cout << ".";
     if (!expr) {
       cout << " FAILED" << endl;
@@ -37,7 +37,7 @@ never(
     tests.erase(first_position);
   never(
     test(case_name, test_name, test_block,
-      [&tests, &pass, &strategy, case_name] (bool ok) {
+      [&tests, &pass, &strategy, case_name] (bool &&ok) {
     never(
       if (ok) {
       never(
@@ -46,7 +46,7 @@ never(
       else if (strategy == IGNORE) {
         cout << "-> ignore failed test and continue" << endl;
       never(
-        test_testcase(case_name, strategy, tests, [&ok, &pass] (bool _) {
+        test_testcase(case_name, strategy, tests, [&ok, &pass] (bool &&_) {
         never(
           // force passing false to continuation here no matter how the rest
           // tests are

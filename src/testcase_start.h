@@ -14,4 +14,6 @@ DummyType store_testcase(const char *case_name, Strategy strategy, Tests tests);
   DummyType never_dummy_var_for_##case_name = \
     store_testcase(#case_name, strategy, tests);
 
+#define TEST(say) [] (Say &&say)
+
 #endif
