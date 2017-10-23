@@ -25,7 +25,6 @@ DummyType store_testcase(const char *name, Strategy strategy, Tests tests) {
 Never test_all(Testcases &testcases, TestcaseFlag &flags, ContA<bool> pass) {
   using namespace std;
 
-never(
   if (testcases.size() == 0) {
   never(
     pass(true)
@@ -47,7 +46,7 @@ never(
       ))
     ))
   )
-)
+}
 
 void preprocess_testcases(Testcases &cases, int argc, char *argv[]) {
   using namespace std;
@@ -77,7 +76,6 @@ void preprocess_testcases(Testcases &cases, int argc, char *argv[]) {
       cout << "warning: not found testcase \"" << argv[i] << "\"" << endl;
     }
   }
-  cout << "~~~" << endl;
 }
 
 Never start(int argc, char *argv[], ContA<int> pass) {

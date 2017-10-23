@@ -11,12 +11,15 @@ struct NeverReach {
   int line;
 };
 
+struct NeverReturn {};
+
 #define never(calling) \
     calling; \
     throw NeverReach { __FILE__, __LINE__ }; \
+    return NeverReturn(); \
   }
 
-using Never = void;
+using Never = NeverReturn;
 
 template <typename T> using Func = std::function<T>;
 template <typename T> using FuncA = Func<void (T &&)>;

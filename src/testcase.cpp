@@ -11,9 +11,13 @@ Never test(const char *case_name, const char *test_name, Test tested,
     cout << ".";
     if (!expr) {
       cout << " FAILED" << endl;
-    never(
-      pass(false)
-    )
+    // never(
+    //   pass(false)
+    // )
+    // A great problem that may be unsolved forever.
+    // `say` is a continuation or not?
+      pass(false);
+    }
   });
   cout << " ok" << endl;
 never(
@@ -25,7 +29,6 @@ Never test_testcase(const char *case_name, Strategy strategy, Tests tests,
   // The very first example of how to write code in CPS.
   using namespace std;
 
-never(
   if (tests.size() == 0) {
   never(
     pass(true)
@@ -38,7 +41,6 @@ never(
   never(
     test(case_name, test_name, test_block,
       [&tests, &pass, &strategy, case_name] (bool &&ok) {
-    never(
       if (ok) {
       never(
         test_testcase(case_name, strategy, tests, pass)
@@ -58,6 +60,6 @@ never(
         cout << "-> abort testcase: " << case_name << endl;
         pass(false)
       )
-    ))
+    })
   )
-)
+}

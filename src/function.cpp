@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
   try {
     start(argc, argv, [&] (int &&code) {
       throw NeverExit { code };
+      return NeverReturn();
     });
   }
   catch (NeverExit &exiting) {
