@@ -2,15 +2,15 @@
 #include "never.h"
 
 
-TESTCASE(SimpleTest, IGNORE, (Tests {
-  {"test 1", TEST(say) {
+TESTCASE(SimpleTest, IGNORE,
+  TEST(test_1, SAY(say) {
     say(21 * 2 == 42);
-  }},
-  {"test 2", TEST(say) {
+  }),
+  TEST(test_2, SAY(say) {
     say(21 * 2 != 42);
-  }},
-  {"test 3", TEST(say) {
+  }),
+  TEST(test_3, SAY(say) {
     say(21 * 2 == 40 + 2);
     say(40 + 2 == 21 * 2);
-  }}
-}))
+  })
+)

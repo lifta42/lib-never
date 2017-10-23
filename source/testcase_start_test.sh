@@ -21,18 +21,18 @@ function test_output_and_exit_code {
 printf '.'
 read -r -d '' expected_output <<EOF
 >> start testcase TestcaseStart
-TestcaseStart: simple test 1 . ok
-TestcaseStart: simple test 2 . ok
+TestcaseStart: simple_test_1 . ok
+TestcaseStart: simple_test_2 . ok
 >> finish testcase TestcaseStart
 >> start testcase MoreTestcase
-MoreTestcase: a red test . ok
-MoreTestcase: a blue test . FAILED
+MoreTestcase: a_red_test . ok
+MoreTestcase: a_blue_test . FAILED
 -> abort testcase: MoreTestcase
 >> finish testcase MoreTestcase
 >> start testcase MoreColor
-MoreColor: an yellow test . FAILED
+MoreColor: a_yellow_test . FAILED
 -> ignore failed test and continue
-MoreColor: a purple test . ok
+MoreColor: a_purple_test . ok
 >> finish testcase MoreColor
 EOF
 testcase_executable=./testcase_start_test
@@ -44,8 +44,8 @@ test_output_and_exit_code "$output" "$expected_output" $exit_code 1
 printf '.'
 read -r -d '' expected_output <<EOF
 >> start testcase TestcaseStart
-TestcaseStart: simple test 1 . ok
-TestcaseStart: simple test 2 . ok
+TestcaseStart: simple_test_1 . ok
+TestcaseStart: simple_test_2 . ok
 >> finish testcase TestcaseStart
 EOF
 testcase_executable=./testcase_start_test
@@ -58,9 +58,9 @@ printf '.'
 read -r -d '' expected_output <<EOF
 warning: not found testcase "NoExistTest"
 >> start testcase MoreColor
-MoreColor: an yellow test . FAILED
+MoreColor: a_yellow_test . FAILED
 -> ignore failed test and continue
-MoreColor: a purple test . ok
+MoreColor: a_purple_test . ok
 >> finish testcase MoreColor
 EOF
 testcase_executable=./testcase_start_test

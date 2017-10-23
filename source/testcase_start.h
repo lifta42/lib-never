@@ -10,10 +10,12 @@
 using DummyType = int;
 DummyType store_testcase(const char *case_name, Strategy strategy, Tests tests);
 
-#define TESTCASE(case_name, strategy, tests) \
+#define TESTCASE(case_name, strategy, tests...) \
   DummyType never_dummy_var_for_##case_name = \
-    store_testcase(#case_name, strategy, tests);
+    store_testcase(#case_name, strategy, Tests { tests });
 
-#define TEST(say) [] (Say &&say)
+#define TEST(test_name, test) { #test_name, test }
+
+#define SAY(say) [] (Say say)
 
 #endif

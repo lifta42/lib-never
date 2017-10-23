@@ -1,9 +1,13 @@
 #include <iostream>
+#include <utility>
 #include "never.h"
+
+using std::move;
+
 
 Never generate_it(int x, ContA<int> pass) {
 never(
-  pass(x)
+  pass(move(x))
 )
 
 Never double_it(int x, ContA<int> pass) {
