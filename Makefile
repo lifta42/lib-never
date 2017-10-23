@@ -26,4 +26,4 @@ clean:
 	make -C $(source_dir) clean
 	make -C $(example_dir) clean
 
-.PHONY: all example clean
+.PHONY: all example clean test
