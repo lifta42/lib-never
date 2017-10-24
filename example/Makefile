@@ -16,5 +16,5 @@ $(targets): $(library)
 01_testing: $(library_test)
 
 clean:
-	-rm $(targets)
+	$(RM) $(targets)
 .PHONY: clean

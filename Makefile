@@ -14,16 +14,16 @@ CXXFLAGS += -std=c++14 -O2
 export project source_dir example_dir library library_test CXXFLAGS
 
 all:
-	make -C $(source_dir)
+	$(MAKE) -C $(source_dir)
 
 example:
-	make -C $(example_dir)
+	$(MAKE) -C $(example_dir)
 
 test:
-	make -C $(source_dir) test
+	$(MAKE) -C $(source_dir) test
 
 clean:
-	make -C $(source_dir) clean
-	make -C $(example_dir) clean
+	$(MAKE) -C $(source_dir) clean
+	$(MAKE) -C $(example_dir) clean
 
 .PHONY: all example clean test

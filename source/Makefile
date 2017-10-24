@@ -10,29 +10,37 @@ objects_test = $(modules_test:%=%.o)
 sources_test = $(modules_test:%=%.cpp)
 
 test_targets = testcase_test testcase_start_test
+test_dir = test
 
 dependence = $(sources:.cpp=.d) $(sources_test:.cpp=.d)
 
-all: $(library)($(objects)) $(library_test)($(objects_test)) \
-	$(test_targets)
+all: $(library) $(library_test)
 
 # https://www.gnu.org/software/make/manual/html_node/Automatic-Prerequisites.html#Automatic-Prerequisites
 %.d: %.cpp
 	@set -e; rm -f $@; \
-	c++ -MM $(CPPFLAGS) $< > $@.$$$$; \
+	$(CXX) -MM $(CPPFLAGS) $< > $@.$$$$; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
-	rm -f $@.$$$$
+	$(RM) -f $@.$$$$
 
 -include $(dependence)
 
 $(test_targets): $(library) $(library_test)
 
-test:
-	sh testcase_test.sh && \
-	sh testcase_start_test.sh
+$(library): $(objects)
+	$(AR) -r -c $@ $^
+
+$(library_test): $(objects_test)
+	$(AR) -r -c $@ $^
+
+test: $(test_targets)
+	$(SHELL) testcase_test.sh && \
+	$(SHELL) testcase_start_test.sh && \
+	$(MAKE) -C $(test_dir) test
 
 clean:
-	-rm $(library) $(objects) $(objects_test) $(test_targets) \
+	$(RM) $(library) $(objects) $(objects_test) $(test_targets) \
 		$(dependence)
+	$(MAKE) -C $(test_dir) clean
 
 .PHONY: all test clean depend

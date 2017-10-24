@@ -5,6 +5,7 @@
 #define CPS_LIBRARY_NEVER_H
 
 #include "function.h"
+#include "nolambda.h"
 
 #ifdef NEVER_TESTCASE
 #include "testcase.h"
