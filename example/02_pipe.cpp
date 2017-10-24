@@ -27,8 +27,5 @@ never(
     generate_it,
     double_it,
     print_it,
-  )(42, [&pass] () {
-  never(
-    pass(0)
-  ))
+  )(42, feed(pass, 0))
 )

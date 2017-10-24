@@ -16,9 +16,10 @@ dependence = $(sources:.cpp=.d) $(sources_test:.cpp=.d)
 all: $(library)($(objects)) $(library_test)($(objects_test)) \
 	$(test_targets)
 
+# https://www.gnu.org/software/make/manual/html_node/Automatic-Prerequisites.html#Automatic-Prerequisites
 %.d: %.cpp
 	@set -e; rm -f $@; \
-	$(CC) -MM $(CPPFLAGS) $< > $@.$$$$; \
+	c++ -MM $(CPPFLAGS) $< > $@.$$$$; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
