@@ -4,9 +4,15 @@
 #ifndef CPS_LIBRARY_NOLAMBDA_H
 #define CPS_LIBRARY_NOLAMBDA_H
 
+#include <utility>
 #include "function.h"
 
-template <typename T> ContV feed(ContA<T> cont, T &&value);
+template <typename T> ContV feed(ContA<T> cont, T &&value) {
+  return [&cont, &value] () {
+  never(
+    cont(std::move(value))
+  );
+}
 
 template <typename T, typename U, typename V> Func<Never (T &&, ContA<V>)> pipe(
   Func<Never (T &&, ContA<U>)> func1, Func<Never (U &&, ContA<V>)> func2);

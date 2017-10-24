@@ -2,7 +2,7 @@
 #include <utility>
 #include "never.h"
 
-using std::move;
+using namespace std;
 
 
 Never generate_it(int x, ContA<int> pass) {
@@ -16,7 +16,7 @@ never(
 )
 
 Never print_it(int x, ContV pass) {
-  std::cout << x << std::endl;
+  cout << x << endl;
 never(
   pass()
 )
