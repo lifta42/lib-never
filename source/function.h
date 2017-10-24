@@ -14,10 +14,9 @@ struct NeverReach {
 struct NeverReturn {};
 
 #define never(calling) \
-    calling; \
-    throw NeverReach { __FILE__, __LINE__ }; \
-    return NeverReturn(); \
-  }
+  calling; \
+  throw NeverReach { __FILE__, __LINE__ }; \
+  return NeverReturn(); }
 
 using Never = NeverReturn;
 

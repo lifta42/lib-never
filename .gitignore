@@ -2,6 +2,7 @@
 *.out
 *_test
 lib*
+*.d
 
 example/*
 !example/Makefile
