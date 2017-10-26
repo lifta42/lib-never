@@ -32,9 +32,6 @@ void bar() {}
 int main() {
   {
     Simple simple;
-  }
-  {
-    Simple simple;
     foo(simple);
   }
   {
