@@ -15,16 +15,6 @@ template <typename T, typename U> struct RevProc<Proc<T, U>> {
   using RetType = U;
 };
 
-template <typename T> struct Lamb;
-template <typename T, typename U> struct Lamb<void (T &&, Cont<U>)> {
-  using ArgType = T;
-  using RetType = U;
-};
-template <typename L> struct RevProc<Lamb<L>> {
-  using ArgType = typename Lamb<L>::ArgType;
-  using RetType = typename Lamb<L>::RetType;
-};
-
 template <typename... Ts> struct Last;
 template <typename T> struct Last<T> {
   using Type = T;
