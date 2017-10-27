@@ -151,6 +151,12 @@ template <typename T, typename C> constexpr auto feed(T &&fed, C pass) {
   };
 }
 
+// not used, but may be useful
+template <typename T> struct RevPartGen : public RevPartGen<decltype(&T::operator())> {};
+template <typename... Ts, typename C> struct RevPartGen<void (C::*)(Ts...) const> {
+  template <template <typename...> typename U> using Type = U<Ts...>;
+};
+
 
 int main() {
   pipe([] (int &&x, Epct<NProc<int, int, int>> pass) {
